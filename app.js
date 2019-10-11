@@ -1,17 +1,18 @@
 const express = require("express");
-const bodyParser = require("body-parser");
- const app = express();
-  // создаем парсер для данных application/x-www-form-urlencoded
-const urlencodedParser = bodyParser.urlencoded({extended: false});
- app.get("/register", urlencodedParser, function (request, response) {
-    response.sendFile(__dirname + "/register.html");
+const app = express();
+ app.use("/about", function (request, response) {
+  response.send("О сайте");
 });
-app.post("/register", urlencodedParser, function (request, response) {
-    if(!request.body) return response.sendStatus(400);
-    console.log(request.body);
-    response.send(`${request.body.userName} - ${request.body.userAge}`);
+ app.use("/products/create",function (request, response) {
+  response.send("Добавление товара");
 });
-  app.get("/", function(request, response){
-    response.send("Главная страница");
+app.use("/products/:id",function (request, response) {
+  response.send(`Товар ${request.params.id}`);
 });
- app.listen(3000);
+app.use("/products/",function (request, response) {
+  response.send("Список товаров");
+});
+ app.use("/", function (request, response) {
+  response.send("Главная страница");
+});
+app.listen(3000);
