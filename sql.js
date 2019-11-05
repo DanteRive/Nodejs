@@ -5,12 +5,11 @@ const mysql = require("mysql2");
  database: "userbasa",
   password: "protectfly" });
  const sql = `INSERT INTO users(  name,   age) VALUES('Sam', 31)`;
- connection.query(sql, function(err, results) {
-    if(err) console.log(err);
-    console.log(results);
-});
- connection.end();
-
+connection.query(sql, function(err, results) {
+        if(err) console.log(err);
+        console.log(results.insertId);
+    });
+    
     
 
 
