@@ -4,10 +4,10 @@ const mysql = require("mysql2");
   user: "root",
  database: "sys",
   password: "protectfly" });
- connection.query("SELECT *FROM users",
-  function(err, results, fields) {
-    console.log(err);
-    console.log(results); // собственно данные
-    console.log(fields); // мета-данные полей 
-});
+const user = [ 3, "Tom"];
+const sql = "INSERT INTO users(idusers, userscol) VALUES(?, ?)";
+ connection.query(sql, user, function(err, results) {
+    if(err) console.log(err);
+    else console.log("Данные добавлены"); }); 
 connection.end();
+
