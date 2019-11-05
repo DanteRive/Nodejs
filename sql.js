@@ -3,11 +3,14 @@ const mysql = require("mysql2");
   host: "localhost",
   user: "root",
  database: "sys",
-  password: "protectfly" });
-const user = [ 3, "Tom"];
-const sql = "INSERT INTO users(idusers, userscol) VALUES(?, ?)";
- connection.query(sql, user, function(err, results) {
-    if(err) console.log(err);
-    else console.log("Данные добавлены"); }); 
-connection.end();
+  password: "protectfly" }).promise();
+connection.query("SELECT * FROM users")
+          .then(([rows, fields]) =>{
+            console.log(rows);
+          })
+          .catch(err =>{
+            console.log(err);
+          });
+
+
 
