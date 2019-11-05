@@ -7,13 +7,19 @@ const pool = mysql.createPool({
     password: "protectfly", 
     database: "userbasa"
 }).promise();
-pool.execute("SELECT * FROM users")
-          .then(result =>{
-            console.log(result[0]);
-          })
-          .catch(function(err) {
-            console.log(err.message);
-          });
+pool.execute("UPDATE users SET age=age+1 WHERE name=?", ["Stan"]) // изменение объектов
+    .then(result =>{ 
+      console.log(result[0]);
+      return pool.execute("SELECT * FROM users"); // получение объектов   
+ })
+    .then(result =>{
+      console.log(result[0]);
+      pool.end();    })
+    .then(()=>{
+      console.log("пул закрыт");    })
+    .catch(function(err) {
+      console.log(err.message);    });
+
 
     
     
