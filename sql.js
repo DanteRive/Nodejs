@@ -4,13 +4,16 @@ const mysql = require("mysql2");
   user: "root",
  database: "sys",
   password: "protectfly" }).promise();
-connection.query("SELECT * FROM users")
-          .then(([rows, fields]) =>{
-            console.log(rows);
+const sql = "INSERT INTO users (idusers, userscol) VALUES (?, ?)";
+const user = [ 4,"Stan"];
+connection.query(sql, user)
+          .then(result =>{
+            console.log(result[0]);
           })
           .catch(err =>{
             console.log(err);
           });
+
 
 
 
