@@ -4,13 +4,14 @@ const mysql = require("mysql2");
   user: "root",
  database: "userbasa",
   password: "protectfly" });
-const sql = `SELECT * FROM users WHERE name=? AND age=?`;
-const filter = ["Tom", 29];
-connection.query(sql, filter, function(err, results) {
+const sql = `UPDATE users SET age=? WHERE name=?`;
+const data = [34, "Tom"];
+connection.query(sql, data, function(err, results) {
     if(err) console.log(err);
     console.log(results);
 });
- connection.end();
+connection.end();
+
 
 
     
