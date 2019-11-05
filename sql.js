@@ -1,17 +1,21 @@
 const mysql = require("mysql2");
-  const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
- database: "userbasa",
-  password: "protectfly" });
-const sql = "DELETE FROM users WHERE name=?";
-const data = ["Sam"]; // удаляем пользователей с именем Sam
-connection.query(sql, data, function(err, results) {
-    if(err) console.log(err);
-    console.log(results);
-});
  
-connection.end();
+const pool = mysql.createPool({
+    connectionLimit: 5,
+    host: "localhost",
+    user: "root",
+    password: "protectfly", 
+    database: "userbasa"
+});
+const sql = "INSERT INTO users (name, age) VALUES(?, ?) ";
+const data = ["Bill", 25];
+pool.query(sql, data, function(err, results) {
+  if(err) console.log(err);
+  console.log(results);
+});
+
+    
+
 
 
 
