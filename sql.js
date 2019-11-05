@@ -3,17 +3,10 @@ const mysql = require("mysql2");
   host: "localhost",
   user: "root",
   password: "protectfly" });
-// тестирование подключения
- connection.connect(function(err){
-    if (err) {
-      return console.error("Ошибка: " + err.message);     }
-    else{
-      console.log("Подключение к серверу MySQL успешно установлено");     }
- });
- // закрытие подключения
- connection.end(function(err) {
-  if (err) {
-    return console.log("Ошибка: " + err.message);
-  }
-  console.log("Подключение закрыто");
+ connection.query("SELECT *FROM users",
+  function(err, results, fields) {
+    console.log(err);
+    console.log(results); // собственно данные
+    console.log(fields); // мета-данные полей 
 });
+connection.end();
